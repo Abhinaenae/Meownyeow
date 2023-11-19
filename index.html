@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Naming & Pet Selection</title>
+  <style>
+    /* Pink-themed styles */
+    /* ... (your existing styles) ... */
+    /* Navbar styles */
+    body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin-top: 30px;
+  background-color: #f9c5d1; /* Pink background color */
+}
+
+h1 {
+  color: #ff69b4; /* Pink font color */
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff69b4; /* Pink button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff1493; /* Darker pink on hover */
+}
+
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 24px; /* Adjust heading font size for smaller screens */
+  }
+
+  input[type="text"] {
+    font-size: 14px; /* Adjust input font size */
+  }
+
+  button {
+    margin-top: 15px; /* Adjust button margin for smaller screens */
+    font-size: 14px; /* Adjust button font size */
+    padding: 8px 16px; /* Adjust button padding */
+  }
+}
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ff69b4;
+      padding: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar-btns {
+      margin-left: 20px;
+    }
+
+    .navbar-btns button {
+      margin-right: 10px;
+      background-color: transparent;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    /* Additional styles for spacing */
+    .content {
+      padding-top: 50px; /* Adjust the value based on the required space */
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-btns">
+      <button onclick="window.location.href='https://github.com/abhinaenae'">GitHub</button>
+      <button onclick="window.location.href='https://linkedin.com/in/abhinay-lavu/'">LinkedIn</button>
+    </div>
+  </div>
+
+  <div class="content"> <!-- Added a wrapper div for content -->
+    <div class="pet-container">
+      <h1>Welcome to MeowNyeow!</h1>
+      <form id="petInfoForm">
+        <input type="text" id="petName" placeholder="Enter a name for your pet">
+        <br><br>
+        <label for="petType">Choose your pet:</label>
+        <select id="petType">
+          <option value="cat">Cat</option>
+        </select>
+        <br><br>
+        <button type="button" onclick="startGame()">Start Playing</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function startGame() {
+      const petName = document.getElementById('petName').value;
+      const petType = document.getElementById('petType').value;
+      if (petName.trim() === '') {
+        alert('Please enter a name for your pet.');
+        return;
+      }
+      localStorage.setItem('petName', petName);
+      localStorage.setItem('petType', petType);
+      window.location.href = 'main_game.html'; // Redirect to the main pet page
+    }
+  </script>
+</body>
+</html>

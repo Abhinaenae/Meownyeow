@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Meownyeow!</title>
+  <style>
+   /* Pink-themed styles */
+body {
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  margin-top: 30px;
+  background-color: #f9c5d1; /* Pink background color */
+}
+
+h1 {
+  color: #ff69b4; /* Pink font color */
+}
+
+input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff69b4; /* Pink button color */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff1493; /* Darker pink on hover */
+}
+
+/* Media query for mobile responsiveness */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 24px; /* Adjust heading font size for smaller screens */
+  }
+
+  input[type="text"] {
+    font-size: 14px; /* Adjust input font size */
+  }
+
+  button {
+    margin-top: 15px; /* Adjust button margin for smaller screens */
+    font-size: 14px; /* Adjust button font size */
+    padding: 8px 16px; /* Adjust button padding */
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="pet-container">
+    <h1>Hello, <span id="petName"></span>!</h1>
+    <img src="cat.png" alt="Pet" id="pet-image">
+    <div class="buttons">
+      <button onclick="feedPet()">Feed</button>
+      <button onclick="playWithPet()">Play</button>
+      <button onclick="cleanPet()">Clean</button>
+      <button onclick="ignorePet()">Ignore</button>
+    </div>
+    <div class="happiness-meter">
+      <label for="happiness">Happiness:</label>
+      <progress id="happiness" max="100" value="50"></progress>
+    </div>
+    <div class="hunger-meter">
+      <label for="hungerLevel">Satiety:</label>
+      <progress id="hungerLevel" max="100" value="50"></progress>
+    </div>
+    <div class="thirst-meter">
+      <label for="thirstLevel">Hydration:</label>
+      <progress id="thirstLevel" max="100" value="50"></progress>
+    </div>
+    <div class="clean-meter">
+      <label for="cleanlinessLevel">Cleanliness:</label>
+      <progress id="cleanlinessLevel" max="100" value="50"></progress>
+    </div>
+     <div class="health-meter">
+      <label for="petHealth">Health:</label>
+      <progress id="petHealth" max="100" value="50"></progress>
+    </div>
+  </div>
+
+  <script>
+    let petName = localStorage.getItem('petName');
+    document.getElementById('petName').textContent = petName || 'Your Pet';
+    let petImage = document.getElementById('pet-image');
+    let happinessBar = document.getElementById('happiness');
+    let happiness = 50; // Initial happiness
+    let hungerBar = document.getElementById('hunger');
+    let hunger = 50; // Initial hunger
+    let thirstBar = document.getElementById('thirst');
+    let thirst = 50; // Initial thirst
+    let cleanBar = document.getElementById('cleanliness');
+    let cleanliness = 50; // Initial cleanliness
+    let healthBar = document.getElementById('health');
+    let petHealth = 50; // Initial health
+
+    
+
+
+    function feedPet() {
+      petImage.src = 'fed.png';
+      setTimeout(() => {
+        petImage.src = 'cat.png'; // Change back to happy after a moment
+      }, 1000);
+      adjustHappiness(5); // Increase happiness by feeding
+      adjustHunger(20); // Reduce hunger level by feeding
+      adjustThirst(20);
+      adjustCleanliness(-20); // Decrease cleanliness by feeding
+      updatePetHealth(5);
+      updateUI(); // Update UI elements
+      
+    }
+
+    function playWithPet() {
+        petImage.src = 'playful.png';
+      setTimeout(() => {
+        petImage.src = 'cat.png'; // Change back to happy after a moment
+      }, 1000);
+      adjustHappiness(15); // Increase happiness by playing
+      // Adjust other needs as necessary
+      adjustHunger(-20); // Reduce hunger level by feeding
+      adjustThirst(-25);
+      adjustCleanliness(-30);
+      updatePetHealth(25)
+      updateUI();
+     // Update UI elements
+    }
+    function cleanPet() {
+        petImage.src = 'fed.png';
+      setTimeout(() => {
+        petImage.src = 'cat.png'; // Change back to happy after a moment
+      }, 1000);
+      adjustCleanliness(40); // Increase cleanliness by cleaning
+        // Adjust other needs as necessary
+      updatePetHealth(5);
+      updateUI(); // Update UI elements
+    }
+    function ignorePet() {
+        petImage.src = 'sad.png';
+      setTimeout(() => {
+        petImage.src = 'cat.png'; // Change back to happy after a moment
+      }, 1000);
+      adjustHappiness(-30); // Decrease happiness by ignoring
+      adjustHunger(10); // Increase hunger level by ignoring
+      adjustThirst(10); // Increase thirst level by ignoring
+      adjustCleanliness(-5); // Decrease cleanliness by ignoring
+      updatePetHealth(-20);
+      updateUI(); // Update UI elements
+    }
+
+    function adjustHappiness(change) {
+      happiness += change;
+      if (happiness > 100) happiness = 100; // Cap happiness at 100
+      if (happiness < 0) happiness = 0; // Cap happiness at 0
+  // Update the pet's overall health
+    }
+
+    function adjustHunger(change) {
+      hunger += change;
+      if (hunger > 100) hunger = 100; // Cap hunger at 100
+      if (hunger < 0) hunger = 0; // Cap hunger at 0
+      // Update the pet's overall health
+    }
+
+    function adjustThirst(change) {
+      thirst += change;
+      if (thirst > 100) thirst = 100; // Cap thirst at 100
+      if (thirst < 0) thirst = 0; // Cap thirst at 0
+
+    }
+
+    function adjustCleanliness(change) {
+      cleanliness += change;
+      if (cleanliness > 100) cleanliness = 100; // Cap cleanliness at 100
+      if (cleanliness < 0) cleanliness = 0; // Cap cleanliness at 0
+
+    }
+
+    function updatePetHealth(change) { // Update the pet's overall health
+      petHealth += change;
+      if (petHealth > 100) petHealth = 100; // Cap thirst at 100
+      if (petHealth < 0) petHealth = 0; // Cap thirst at 0
+    
+    }
+    function updateUI() {
+      document.getElementById('hungerLevel').value = hunger;
+      document.getElementById('thirstLevel').value = thirst;
+      document.getElementById('cleanlinessLevel').value = cleanliness;
+      document.getElementById('petHealth').value = petHealth;
+      document.getElementById('happiness').value = happiness; // Update happiness bar
+      if (happiness === 100 && hunger === 100 && thirst === 100 && cleanliness === 100 && (petHealth>80)) {
+        window.location.href = 'happy_pet.html'; // Redirect to the happy pet page
+      }
+      
+      if(petHealth <= 0){
+        window.location.href = 'ran_pet.html';// Redirect to the run pet page
+      }
+    }
+  </script>
+</body>
+</html>
